@@ -1,0 +1,4 @@
+rails new denteo --minimal
+bundle
+cap install
+
