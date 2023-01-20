@@ -9,3 +9,9 @@ cap install
 bundle install
 bundle exec vite install
 
+-> vue
+
+npm install vue
+npm install @vitejs/plugin-vue
+
+
