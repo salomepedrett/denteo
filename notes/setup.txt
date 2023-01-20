@@ -2,3 +2,10 @@ rails new denteo --minimal
 bundle
 cap install
 
+-> vite
+  -> Gemfile
+    gem 'vite_rails'
+
+bundle install
+bundle exec vite install
+
