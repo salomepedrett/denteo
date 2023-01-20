@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ slot.start }} - {{ slot.stop }}
+    {{ slot.from.toISO() }} - {{ slot.to.toISO() }}
   </div>
 </template>
 
