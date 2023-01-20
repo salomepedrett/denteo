@@ -1,6 +1,8 @@
 <template>
   <div>
-    Hello World from Vue
+    <div>
+      Hello World from Vue
+    </div>
     <router-view></router-view>
   </div>
 </template>

@@ -32,13 +32,15 @@ import { createApp } from "vue";
 // https://vueschool.io/lessons/installing-and-setting-up-vue-router-with-vite-vite-only
 import { createRouter, createWebHistory } from "vue-router/dist/vue-router.esm-bundler.js";
 import App from "../App.vue";          
+import Home from "../components/Home.vue"
 import Slots from "../components/Slots.vue"
 
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    {path: "/", name: "Slots", component: Slots}
+    {path: "/", name: "Home", component: Home},
+    {path: "/slots", name: "Slots", component: Slots}
   ]
 })
 
