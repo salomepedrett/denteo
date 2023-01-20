@@ -27,7 +27,23 @@ console.log('Visit the guide for more information: ', 'https://vite-ruby.netlify
 // Example: Import a stylesheet in app/frontend/index.css
 // import '~/index.css'
 
+
 import { createApp } from "vue";       
+// https://vueschool.io/lessons/installing-and-setting-up-vue-router-with-vite-vite-only
+import { createRouter, createWebHistory } from "vue-router/dist/vue-router.esm-bundler.js";
 import App from "../App.vue";          
-                                       
-createApp(App).mount('#app');          
+import Slots from "../components/Slots.vue"
+
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {path: "/", name: "Slots", component: Slots}
+  ]
+})
+
+createApp(App)
+  .use(router)
+  .mount('#app');          
+
+
