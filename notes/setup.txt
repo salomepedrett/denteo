@@ -14,4 +14,7 @@ bundle exec vite install
 npm install vue
 npm install @vitejs/plugin-vue
 
+-> up and running
 
+rails s 
+bin/vite dev
