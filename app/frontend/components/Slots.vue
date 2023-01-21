@@ -45,8 +45,8 @@ const splitDayIntoSlots = (day) => {
   const dayEnd      = day.plus({ hours: DAY_END_HOUR })
   const dayDuration = dayEnd.diff(dayStart).milliseconds / 1000   // in seconds
 
-  const starts = [ ...Array(dayDuration).keys() ]                 // seconds from start to end of day
-    .filter(x => x % 1800 == 0)                                   // 1800 seconds = 30 minutes
+  const starts = [ ...Array(dayDuration).keys() ]                 // seconds from start to end of day: [0, 1, 2, 3, ..., dayDuration]
+    .filter(x => x % 1800 == 0)                                   // take seconds that are divisible by 1800 (1800 seconds = 30 minutes): [0, 1800, 3600, ...]
     .map(x => dayStart.plus({ seconds: x }))                      // convert to absolute datetime again
 
   const slots = starts.map(x => ({ from: x, to: x.plus({seconds: 1800}) }))
