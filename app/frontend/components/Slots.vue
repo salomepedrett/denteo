@@ -44,8 +44,10 @@ const splitDayIntoSlots = (day) => {
   const dayStart    = day.plus({ hours: DAY_START_HOUR })
   const dayEnd      = day.plus({ hours: DAY_END_HOUR })
   const dayDuration = dayEnd.diff(dayStart).milliseconds / 1000   // in seconds
+  console.log("dayDuration")
+  console.log(dayDuration)
 
-  const starts = [ ...Array(dayDuration).keys() ]                 // seconds from start to end of day: [0, 1, 2, 3, ..., dayDuration]
+  const starts = [ ...Array(dayDuration).keys() ]                 // seconds from start to end of day: [0, 1, 2, 3, ..., 35999]
     .filter(x => x % 1800 == 0)                                   // take seconds that are divisible by 1800 (1800 seconds = 30 minutes): [0, 1800, 3600, ...]
     .map(x => dayStart.plus({ seconds: x }))                      // convert to absolute datetime again
 
@@ -64,6 +66,8 @@ const findFreeTimeslotsForOneDay = (day) => {
   const lunch        = { from: day.plus({ hours: LUNCH_START_HOUR }), to: day.plus({ hours: LUNCH_END_HOUR }) }
   const blocks       = appointments.concat([lunch]).sort((a,b) => a.from - b.from)
   const slots        = splitDayIntoSlots(day)
+  console.log("slots")
+  console.log(slots)
   const freeSlots    = slots.filter(slot => slotIsFree(slot, blocks))
   return freeSlots
 }
