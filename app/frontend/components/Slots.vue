@@ -12,7 +12,7 @@
 import Slot from "./Slot.vue"
 import { Interval, DateTime } from "luxon"
 
-const logDates      = slots => console.log(slots.map(x => ({from: x.from.toISO(), to: x.to.toISO()})))
+const logDates      = datepairs => console.log(datepairs.map(x => ({from: x.from.toISO(), to: x.to.toISO()})))
 const parseDateTime = (string) => DateTime.fromISO(string, { zone: "Europe/Paris"})
 
 const searchRange = { from: parseDateTime("2021-01-04"), to: parseDateTime("2021-01-07").plus({days: 1})};
@@ -30,7 +30,7 @@ const weeklyAppointments = [
 ];
 
 console.log("weeklyAppointments")
-console.log(weeklyAppointments)
+logDates(weeklyAppointments)
 
 const DAY_START_HOUR   = 8;
 const DAY_END_HOUR     = 18;
@@ -44,8 +44,6 @@ const splitDayIntoSlots = (day) => {
   const dayStart    = day.plus({ hours: DAY_START_HOUR })
   const dayEnd      = day.plus({ hours: DAY_END_HOUR })
   const dayDuration = dayEnd.diff(dayStart).milliseconds / 1000   // in seconds
-  console.log("dayDuration")
-  console.log(dayDuration)
 
   const starts = [ ...Array(dayDuration).keys() ]                 // seconds from start to end of day: [0, 1, 2, 3, ..., 35999]
     .filter(x => x % 1800 == 0)                                   // take seconds that are divisible by 1800 (1800 seconds = 30 minutes): [0, 1800, 3600, ...]
@@ -66,9 +64,16 @@ const findFreeTimeslotsForOneDay = (day) => {
   const lunch        = { from: day.plus({ hours: LUNCH_START_HOUR }), to: day.plus({ hours: LUNCH_END_HOUR }) }
   const blocks       = appointments.concat([lunch]).sort((a,b) => a.from - b.from)
   const slots        = splitDayIntoSlots(day)
-  console.log("slots")
-  console.log(slots)
   const freeSlots    = slots.filter(slot => slotIsFree(slot, blocks))
+
+  console.log("---")
+  console.log("blocks")
+  logDates(blocks)
+  console.log("slots")
+  logDates(slots)
+  console.log("freeSlots")
+  logDates(freeSlots)
+
   return freeSlots
 }
 
